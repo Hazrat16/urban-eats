@@ -52,7 +52,7 @@ const UpdateItem = () => {
   };
 
 //   useEffect(() => {
-//     fetch(`http://localhost:5000/menu/${_id}`)
+//     fetch(`https://urban-eats-server.vercel.app/menu/${_id}`)
 //     .then(res=>res.json())
 //     .then(data=>{
 //         console.log(data)
