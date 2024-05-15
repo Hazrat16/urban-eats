@@ -1,17 +1,18 @@
 import {
-    FaAd,
-    FaBook,
-    FaCalendar,
-    FaEnvelope,
-    FaHome,
-    FaList,
-    FaSearch,
-    FaShoppingCart,
-    FaUsers,
-    FaUtensils,
+  FaAd,
+  FaBook,
+  FaCalendar,
+  FaEnvelope,
+  FaHome,
+  FaList,
+  FaSearch,
+  FaShoppingCart,
+  FaUsers,
+  FaUtensils,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
@@ -19,11 +20,22 @@ const Dashboard = () => {
 
   // TODO: get isAdmin value from the database
   const [isAdmin] = useAdmin();
+  const { user } = useAuth();
+  console.log(user);
 
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-orange-400">
+      <div className="w-64 min-h-screen bg-gray-300 pt-2 ">
         <ul className="menu p-4">
+          <li>
+            <img
+              src={user?.photoURL}
+              width="40%"
+              style={{ borderRadius: "50%" }}
+            />
+            <p className="font-bold">Hi!! </p>
+            <p>{user?.displayName}</p>
+          </li>
           {isAdmin ? (
             <>
               <li>

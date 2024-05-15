@@ -27,16 +27,16 @@ const Order = () => {
                 <title>Urban Eats | Order Food</title>
             </Helmet>
             <Cover img={orderCoverImg} title="Order Food"></Cover>
-            <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                <TabList>
-                    <Tab>Salad</Tab>
-                    <Tab>Pizza</Tab>
-                    <Tab>Soup</Tab>
-                    <Tab>Dessert</Tab>
-                    <Tab>Drinks</Tab>
+            <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}  >
+                <TabList  className="tabs tabs-boxed m-10 py-3 px-5 bg-[#197BFD] ">
+                    <Tab className="tab">Salad</Tab>
+                    <Tab className="tab">Pizza</Tab>
+                    <Tab className="tab">Soup</Tab>
+                    <Tab className="tab">Dessert</Tab>
+                    <Tab className="tab">Drinks</Tab>
                 </TabList>
-                <TabPanel>
-                    <OrderTab items={salad}></OrderTab>
+                <TabPanel >
+                    <OrderTab items={salad} className="tab"></OrderTab>
                 </TabPanel>
                 <TabPanel>
                     <OrderTab items={pizza}></OrderTab>
