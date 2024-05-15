@@ -56,14 +56,13 @@ const AllUsers = () => {
 
   return (
     <div>
-      <div className="flex justify-evenly my-4">
-        <h2 className="text-3xl">All Users</h2>
-        <h2 className="text-3xl">Total Users: {users.length}</h2>
+      <div className="flex flex-col justify-center content-center my-4">
+        <h2 className="text-3xl text-center">All Users</h2>
+        <h2 className="text-xl text-center">Total Number of Users: {users.length}</h2>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border-t-lg">
         <table className="table table-zebra w-full">
-          {/* head */}
-          <thead>
+          <thead className="bg-[#197BFD] h-20 text-white text-center ">
             <tr>
               <th></th>
               <th>Name</th>
@@ -72,7 +71,7 @@ const AllUsers = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className=" text-center ">
             {users.map((user, index) => (
               <tr key={user._id}>
                 <th>{index + 1}</th>

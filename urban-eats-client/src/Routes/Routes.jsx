@@ -5,6 +5,7 @@ import AddItems from "../pages/Dashboard/AddItems/AddItems";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Cart from "../pages/Dashboard/Cart/Cart";
+import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
@@ -94,6 +95,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <AdminRoute>
+            <ManageBookings></ManageBookings>
           </AdminRoute>
         ),
       },

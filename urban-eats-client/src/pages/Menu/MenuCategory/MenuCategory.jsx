@@ -14,9 +14,13 @@ const MenuCategory = ({items, title, img}) => {
                     ></PopularMenuItem>)
                 }
             </div>
-            <Link to={`/order/${title}`}>
+            {title && title ?
+            <Link to={`/order/${title}`}  >
             <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
-            </Link>
+            </Link>:
+            <Link to={`/order/salad`}  >
+            <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
+            </Link>}
         </div>
     );
 };

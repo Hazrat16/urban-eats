@@ -24,9 +24,6 @@ const NavBar = () => {
         <Link to="/order/salad">Order</Link>
       </li>
       <li>
-        <Link to="/secret">Secret</Link>
-      </li>
-      <li>
         <Link to="/dashboard/cart">
           <button className="btn">
             <FaShoppingCart className="mr-2"></FaShoppingCart>
@@ -81,7 +78,7 @@ const NavBar = () => {
             <img src="../../../../src/assets/logo.png" width="40%" style={{borderRadius:"10px"}}/>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:none">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
