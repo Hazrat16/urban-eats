@@ -33,7 +33,7 @@ const NavBar = () => {
       </li>
       {user ? (
         <li className=" flex-row">
-          <span>{user?.displayName}</span>
+          
           <button onClick={handleLogOut}>LogOut</button>
         </li>
       ) : (
@@ -69,13 +69,13 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
             >
               {navOptions}
             </ul>
           </div>
           <Link to="/" >
-            <img src="../../../../src/assets/logo.png" width="40%" style={{borderRadius:"10px"}}/>
+            <img src="../../../../src/assets/logo.png" width="20%" style={{borderRadius:"10px"}}/>
           </Link>
         </div>
         <div className="navbar-center hidden lg:none">
