@@ -40,13 +40,14 @@ nav.main-menu.expanded {
 }
 
 .main-menu > ul {
-  margin: 7px 0;
+  margin: 50px 0 7px;
 }
 
 .main-menu li {
   position: relative;
   display: block;
   width: 250px;
+  margin: 15px 0;
 }
 
 .main-menu li > a {
