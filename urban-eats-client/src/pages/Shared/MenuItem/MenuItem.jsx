@@ -1,5 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
  const MenuItem = ({ item }) => {
   const { name, image, recipe } = item;
+  const navigate = useNavigate();
+  const handleCart = () => {
+    navigate("/order/salad");
+  };
   return (
     <div className="flex space-x-2">
       <div className="card w-96 bg-base-100 shadow-xl ">
@@ -10,7 +16,7 @@
           <h2 className="card-title">{name}</h2>
           <p>{recipe}</p>
           <div className="card-actions">
-            <button className="btn btn-primary">ADD TO CART</button>
+            <button className="btn btn-primary" onClick={handleCart}>ADD TO CART</button>
           </div>
         </div>
       </div>

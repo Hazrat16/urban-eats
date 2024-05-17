@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Layout/Dashboard";
 import Main from "../Layout/Main";
+import BookTable from "../pages/BookTable/BookTable";
 import AddItems from "../pages/Dashboard/AddItems/AddItems";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "order/:category",
         element: <Order></Order>,
+      },
+      {
+        path: "book-table",
+        element: <BookTable></BookTable>,
       },
       {
         path: "login",

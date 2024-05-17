@@ -3,25 +3,25 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://urban-eats-server.vercel.app",
+  baseURL: "http://localhost:5000",
 });
-const useAxiosSecure = () => {
+const useAxiosSecureLocal = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
   axiosSecure.interceptors.request.use(
-     (config) =>{
+    (config) => {
       const token = localStorage.getItem("access-token");
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
-     (error) =>{
+    (error) => {
       return Promise.reject(error);
     }
   );
 
   axiosSecure.interceptors.response.use(
-     (response)=> {
+    (response) => {
       return response;
     },
     async (error) => {
@@ -37,4 +37,4 @@ const useAxiosSecure = () => {
   return axiosSecure;
 };
 
-export default useAxiosSecure;
+export default useAxiosSecureLocal;
