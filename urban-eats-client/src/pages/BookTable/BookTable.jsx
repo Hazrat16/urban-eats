@@ -9,7 +9,7 @@ const bookedInfo = [
   ];
 
 const BookTable = () => {
-    const [selectedMovie, setSelectedMovie] = useState(bookedInfo[0]);
+    const [selectedMovie, setSelectedMovie] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [occupiedSeats, setOccupiedSeats] = useState([]);
 
@@ -24,10 +24,11 @@ const BookTable = () => {
           console.error('Error fetching bookings:', error);
         });
     }, []);
+    console.log(occupiedSeats)
     return (
       <>
         <TableBookings
-          movie={selectedMovie}
+          occupiedSeats={occupiedSeats}
           selectedSeats={selectedSeats}
           onSelectedSeatsChange={(selectedSeats) =>
             setSelectedSeats(selectedSeats)

@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecureLocal from "../../hooks/useAxiosSecureLocal";
 import useBookings from "../../hooks/useBookings";
 
-const TableBookings = ({ movie, selectedSeats, onSelectedSeatsChange }) => {
+const TableBookings = ({ occupiedSeats, selectedSeats, onSelectedSeatsChange }) => {
   const [bookedTable, setBookedTable] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [mealType, setMealType] = useState("");
@@ -13,11 +13,13 @@ const TableBookings = ({ movie, selectedSeats, onSelectedSeatsChange }) => {
   const [bookings,refetch] = useBookings();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecureLocal();
+
+  console.log("..............",occupiedSeats)
  
 
   const onSeatClick = (seat) => {
     const isSelected = selectedSeats.includes(seat);
-    const isOccupied = movie.occupied.includes(seat);
+    const isOccupied = occupiedSeats.includes(seat);
 
     if (!isOccupied) {
       if (isSelected) {
@@ -88,7 +90,7 @@ console.log(bookings)
                 <div
                   key={i}
                   className={`seat ${
-                    movie.occupied.includes(i) ? "occupied" : ""
+                    occupiedSeats.includes(i) ? "occupied" : ""
                   } ${selectedSeats.includes(i) ? "selected" : ""} 
                           ${i % 8 === 1 || i % 8 === 6 ? "mr-12" : ""}`}
                   onClick={() => onSeatClick(i)}
