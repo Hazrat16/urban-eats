@@ -30,6 +30,7 @@ async function run() {
     const reviewCollection = client.db("urban-eats").collection("reviews");
     const cartCollection = client.db("urban-eats").collection("carts");
     const userCollection = client.db("urban-eats").collection("users");
+    const bookingsCollection = client.db("urban-eats").collection("bookings");
 
     // jwt related api
     app.post("/jwt", async (req, res) => {
@@ -91,8 +92,6 @@ async function run() {
 
     app.post("/users", async (req, res) => {
       const user = req.body;
-      // insert email if user doesnt exists:
-      // you can do this many ways (1. email unique, 2. upsert 3. simple checking)
       const query = { email: user.email };
       const existingUser = await userCollection.findOne(query);
       if (existingUser) {
@@ -260,6 +259,18 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await cartCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    //bookings related api
+    app.get("/bookings", async (req, res) => {
+      const result = await bookingsCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.post("/bookings", async (req, res) => {
+      const bookingsInfo = req.body;
+      const result = await bookingsCollection.insertOne(bookingsInfo);
       res.send(result);
     });
 

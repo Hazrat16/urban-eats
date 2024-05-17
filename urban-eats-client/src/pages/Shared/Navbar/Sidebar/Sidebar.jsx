@@ -46,6 +46,12 @@ const Sidebar = () => {
           </a>
         </li>
         <li>
+          <a href="/book-table">
+          <i class="fa fa-table" aria-hidden="true"></i>
+            <span class="nav-text">Book Table</span>
+          </a>
+        </li>
+        <li>
           <a href="dashboard/users">
             <i class="fa fa-info fa-2x"></i>
             <span class="nav-text">Dashboard</span>
