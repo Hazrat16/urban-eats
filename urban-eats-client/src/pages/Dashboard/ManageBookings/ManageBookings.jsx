@@ -1,13 +1,13 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxiosSecureLocal from "../../../hooks/useAxiosSecureLocal";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useBookings from "../../../hooks/useBookings";
 import "./style.css";
 
 const ManageBookings = () => {
   const [bookings, refetch] = useBookings();
-  const axiosSecure = useAxiosSecureLocal();
+  const axiosSecure = useAxiosSecure();
 
   const handleDeleteBooking = (id) =>{
     console.log("deleted bookings id",id)

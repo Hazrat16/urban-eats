@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import PhoneIcon from "../../assets/svg/PhoneIcon";
 import useAuth from "../../hooks/useAuth";
-import useAxiosSecureLocal from "../../hooks/useAxiosSecureLocal";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useBookings from "../../hooks/useBookings";
 
 const TableBookings = ({ occupiedSeats, selectedSeats, onSelectedSeatsChange }) => {
@@ -12,7 +12,7 @@ const TableBookings = ({ occupiedSeats, selectedSeats, onSelectedSeatsChange }) 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [bookings,refetch] = useBookings();
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecureLocal();
+  const axiosSecure = useAxiosSecure();
 
   console.log("..............",occupiedSeats)
  

@@ -1,11 +1,11 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
-import useAxiosLocal from "./useAxiosLocal";
+import useAxiosPublic from "./useAxiosPublic";
 
 
 const useBookings = () => {
-    const axiosLocal = useAxiosLocal();
+    const axiosLocal = useAxiosPublic();
     const { user } = useAuth();
     const queryClient = useQueryClient();
       const { data: bookings=[],refetch } = useQuery({
