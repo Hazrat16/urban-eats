@@ -75,7 +75,7 @@ const NavBar = () => {
             </ul>
           </div>
           <Link to="/" >
-            <img src="../../../../src/assets/logo.png" width="20%" style={{borderRadius:"10px"}}/>
+          <img src="https://i.ibb.co/3CT19Gc/logo.png" width="18%" alt="logo" border="0" style={{borderRadius:"20px 5px 5px 5px"}}/>
           </Link>
         </div>
         <div className="navbar-center hidden lg:none">
