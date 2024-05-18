@@ -2,14 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import TableBookings from './TableBookings';
 
-const bookedInfo = [
-    {
-      occupied: [20, 21, 30, 1, 2, 8]
-    },
-  ];
 
 const BookTable = () => {
-    const [selectedMovie, setSelectedMovie] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [occupiedSeats, setOccupiedSeats] = useState([]);
 
