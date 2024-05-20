@@ -5,13 +5,13 @@ import useAxiosPublic from "./useAxiosPublic";
 
 
 const useBookings = () => {
-    const axiosLocal = useAxiosPublic();
+  const axios = useAxiosPublic();
     const { user } = useAuth();
     const queryClient = useQueryClient();
       const { data: bookings=[],refetch } = useQuery({
         queryKey: ["bookings"],
         queryFn: async () => {
-            const res = await axiosLocal.get(`/bookings`);
+            const res = await axios.get(`/bookings`);
             return res.data;
             
         }
