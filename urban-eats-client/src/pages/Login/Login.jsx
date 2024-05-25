@@ -62,13 +62,14 @@ const Login = () => {
           <Helmet>
               <title>Urban Eats | Login</title>
           </Helmet>
-          <div className="hero min-h-screen bg-base-200">
-              <div className="hero-content flex-col md:flex-row-reverse">
-                  <div className="text-center md:w-1/2 lg:text-left">
+          <div className="hero min-h-screen bg-base-200 bg-[url('/src/assets/login.jpg')]">
+              <div className="hero-content flex-col md:flex-row-reverse w-full">
+                  <div className="text-center md:w-1/2  bg-black bg-opacity-20 text-white">
+                    <img src="/src/assets/logo.png" width="30%" className="my-5 mx-auto"/>
                       <h1 className="text-5xl font-bold">Login now!</h1>
-                      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                      <p className="py-6">To Get Your Food Home or Pre-bookings</p>
                   </div>
-                  <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
+                  <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100 bg-opacity-90">
                       <form onSubmit={handleLogin} className="card-body">
                           <div className="form-control">
                               <label className="label">

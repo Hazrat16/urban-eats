@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <>
-      <section section className="w-full bg-black">
+      <section section className="w-full mt-10 bg-black">
         <div className="px-8 py-12 mx-auto max-w-7xl">
           <div className="grid grid-cols-2 gap-10 mb-3 md:grid-cols-3 lg:grid-cols-12 lg:gap-20">
             <div className="col-span-3">
