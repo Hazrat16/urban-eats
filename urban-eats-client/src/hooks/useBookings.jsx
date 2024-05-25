@@ -17,7 +17,6 @@ const useBookings = () => {
         }
     })
   
-    // Invalidate query when user logs in or logs out
     useEffect(() => {
       if (user) {
         queryClient.invalidateQueries("bookings");
