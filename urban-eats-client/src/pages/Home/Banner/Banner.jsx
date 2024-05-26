@@ -1,12 +1,15 @@
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import img1 from '../../../assets/home/01.jpg';
-import img2 from '../../../assets/home/02.jpg';
-import img3 from '../../../assets/home/03.jpg';
-import img4 from '../../../assets/home/04.jpg';
+import img1 from '../../../assets/home/01.png';
+import img2 from '../../../assets/home/02.png';
+import img3 from '../../../assets/home/03.png';
+import img4 from '../../../assets/home/04.png';
 import img5 from '../../../assets/home/05.png';
 import img6 from '../../../assets/home/06.png';
+import img7 from '../../../assets/home/07.png';
+import img8 from '../../../assets/home/08.png';
+import img9 from '../../../assets/home/09.png';
 
 const Banner = () => {
     return (
@@ -28,6 +31,15 @@ const Banner = () => {
             </div>
             <div>
                 <img src={img6} />
+            </div>
+            <div>
+                <img src={img7} />
+            </div>
+            <div>
+                <img src={img8} />
+            </div>
+            <div>
+                <img src={img9} />
             </div>
         </Carousel>
     );
