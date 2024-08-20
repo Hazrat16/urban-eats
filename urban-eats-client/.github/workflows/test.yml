@@ -1,0 +1,47 @@
+name: Lint Check
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint:
+    name: Run Lint on Changed Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get list of changed files
+        id: changed_files
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          git diff --name-only origin/${{ github.base_ref }}...HEAD > changed_files.txt
+          cat changed_files.txt
+
+      - name: Filter JavaScript/TypeScript files
+        id: filtered_files
+        run: |
+          files=$(grep -E '\.(js|jsx|ts|tsx)$' changed_files.txt | tr '\n' ' ')
+          echo "::set-output name=files::$files"
+
+      - name: Run ESLint
+        if: steps.filtered_files.outputs.files != ''
+        run: |
+          echo "Linting files: ${{ steps.filtered_files.outputs.files }}"
+          npx eslint ${{ steps.filtered_files.outputs.files }}
