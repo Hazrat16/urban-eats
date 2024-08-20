@@ -1,4 +1,4 @@
-name: Lint Code
+name: Lint
 
 on:
   push:
@@ -11,21 +11,25 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set working directory
-        run: cd urban-eats-client
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "zzzzzzzzzzz"
+          cd urban-eats-client
+          echo "xxxxxxxxxx"
+          npm install
 
-      - name: Run linter
-        run: npm run lint
+      - name: Run lint
+        run: |
+          echo "aaaaaaaa"
+          cd urban-eats-client
+          echo "bbbbbbbbbb"
+          npm run lint
