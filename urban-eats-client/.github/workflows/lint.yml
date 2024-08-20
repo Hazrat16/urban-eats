@@ -1,0 +1,28 @@
+name: Lint Changed Files
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint changed files
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+          | grep '\.jsx\?$' \
+          | xargs --no-run-if-empty npx eslint
