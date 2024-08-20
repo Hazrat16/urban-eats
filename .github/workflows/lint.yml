@@ -1,17 +1,16 @@
 name: Lint
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,15 +28,14 @@ jobs:
       - name: Get list of changed files
         id: changed-files
         run: |
-          # Get the base and head SHA values for the PR
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} -- '*.js' '*.jsx')
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha || github.base_ref }} ${{ github.sha || github.head_ref }} -- '*.js' '*.jsx')
+          echo "::set-output name=files::$CHANGED_FILES"
 
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
-          if [ -n "${{ env.CHANGED_FILES }}" ]; then
-            echo "${{ env.CHANGED_FILES }}" | xargs npm run lint --
+          if [ -n "${{ steps.changed-files.outputs.files }}" ]; then
+            echo "${{ steps.changed-files.outputs.files }}" | xargs npm run lint --
           else
             echo "No JavaScript/JSX files were changed."
           fi
