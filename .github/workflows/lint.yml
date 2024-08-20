@@ -22,14 +22,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "zzzzzzzzzzz"
           cd urban-eats-client
-          echo "xxxxxxxxxx"
           npm install
 
       - name: Run lint
         run: |
-          echo "aaaaaaaa"
           cd urban-eats-client
-          echo "bbbbbbbbbb"
           npm run lint
