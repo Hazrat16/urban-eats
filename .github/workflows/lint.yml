@@ -65,24 +65,33 @@ jobs:
           node-version: "14"
 
       - name: Fetch all branches
-        run: |
-          git fetch --all
+        run: git fetch --all
 
       - name: Get list of changed files using git diff
         id: changed-files
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...origin/${{ github.event.pull_request.head.ref }} | grep -E '\.jsx?$')
+          # If this is a pull request, compare the base and head branches
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+            HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
+            CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
+          else
+            # Otherwise, compare the last commit to the current one (for push events)
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+          fi
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
       - name: Output changed files for debugging
         run: |
-          echo "Changed files: ${{ env.CHANGED_FILES }}"
+          echo "Changed files: $CHANGED_FILES"
 
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
-          if [ -n "${{ env.CHANGED_FILES }}" ]; then
-            echo "${{ env.CHANGED_FILES }}" | xargs npm run lint --
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "$CHANGED_FILES" | xargs npm run lint --
           else
             echo "No JavaScript/JSX files were changed."
           fi
+        env:
+          CHANGED_FILES: ${{ env.CHANGED_FILES }}
