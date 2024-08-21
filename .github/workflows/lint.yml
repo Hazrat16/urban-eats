@@ -95,9 +95,6 @@ jobs:
         run: |
           pwd
           ls
-          cd ..
-          pwd
-          ls
           cd urban-eats-client
           pwd
           if [ -n "$CHANGED_FILES" ]; then
