@@ -97,6 +97,7 @@ jobs:
           ls
           cd urban-eats-client
           pwd
+          ./node_modules/.bin/eslint .
           if [ -n "$CHANGED_FILES" ]; then
             echo "$CHANGED_FILES" | xargs -I {} sh -c 'eslint {} --ext js,jsx --report-unused-disable-directives --max-warnings 0'
           else
