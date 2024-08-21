@@ -25,6 +25,11 @@ jobs:
           cd urban-eats-client
           npm install
 
+      - name: Run lint on all files
+        run: |
+          cd urban-eats-client
+          npm run lint
+
       - name: Get list of changed files
         id: changed-files
         run: |
