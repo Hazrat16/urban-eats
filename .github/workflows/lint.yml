@@ -58,6 +58,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2 # Fetch at least the last two commits to avoid ambiguous HEAD^
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -76,7 +78,7 @@ jobs:
             HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
             CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
           else
-            # Otherwise, compare the last commit to the current one (for push events)
+            # Otherwise, compare the last two commits (for push events)
             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
           fi
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
