@@ -71,7 +71,9 @@ jobs:
           cd urban-eats-client
            npm install
       - name: Fetch all branches
-        run: git fetch --all
+        run: |
+          pwd
+          git fetch --all
 
       - name: Get list of changed files using git diff
         id: changed-files
