@@ -94,8 +94,10 @@ jobs:
       - name: Run lint on changed files
         run: |
           pwd
+          ls
           cd ..
           pwd
+          ls
           cd urban-eats-client
           pwd
           if [ -n "$CHANGED_FILES" ]; then
