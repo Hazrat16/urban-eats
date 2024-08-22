@@ -9,14 +9,9 @@ module.exports = {
     ecmaVersion: "latest", // Or a specific ECMAScript version like 2020
     sourceType: "module", // Ensure this is set to 'module' to support import/export syntax
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
+    },
   },
-  },
-  settings: {
-    react: {
-        version: "detect" // Automatically detect the react version
-    }
-},
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -25,7 +20,7 @@ module.exports = {
     "prettier",
     "plugin:prettier/recommended",
   ],
-  plugins: ["react-refresh", "import", "prettier","react","react-hooks"],
+  plugins: ["react-refresh", "import", "prettier", "react", "react-hooks"],
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
