@@ -78,10 +78,10 @@ jobs:
       - name: Get list of changed files using git diff
         id: changed-files
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" || "${{ github.event_name }}" = "push" ]; then
-            BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
-            HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
-            CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+          BASE_BRANCH=$GITHUB_BASE_REF
+          HEAD_BRANCH=$GITHUB_HEAD_REF
+          CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
           else
             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
           fi
