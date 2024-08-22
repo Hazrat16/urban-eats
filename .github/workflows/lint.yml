@@ -161,3 +161,11 @@ jobs:
           fi
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
+
+      - name: Check if useAdmin.jsx exists
+        run: |
+          if [[ "$CHANGED_FILES" =~ "urban-eats-client/src/hooks/useAdmin.jsx" ]]; then
+            echo "useAdmin.jsx exists in changed files."
+          else
+            echo "useAdmin.jsx does not exist in changed files."
+          fi
