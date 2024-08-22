@@ -16,6 +16,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "prettier",
     "plugin:prettier/recommended",
+    "react:recommended",
   ],
   plugins: ["react-refresh", "import", "prettier"],
   rules: {
