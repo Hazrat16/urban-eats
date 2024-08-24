@@ -129,7 +129,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd urban-eats-client
-          npm install --legacy-peer-deps
+          npm install
 
       - name: Fetch all branches
         run: |
