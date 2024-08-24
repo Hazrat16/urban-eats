@@ -139,13 +139,14 @@ jobs:
         id: changed-files
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-             BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
-             HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
-             CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
-           else
-             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
-           fi
-             echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+            BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+            HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
+            CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+          fi
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+        shell: /usr/bin/bash -e {0}
 
       - name: Output changed files for debugging
         run: |
