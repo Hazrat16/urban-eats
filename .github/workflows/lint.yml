@@ -138,14 +138,25 @@ jobs:
       - name: Get list of changed files using git diff
         id: changed-files
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
-            HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
-            CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
-          else
-            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
-          fi
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+          echo "GitHub Event: ${{ github.event_name }}"
+            if [ "${{ github.event_name }}" = "pull_request" ]; then
+              BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+              HEAD_BRANCH="${{ github.event.pull_request.head.ref }}"
+              echo "Base Branch: $BASE_BRANCH"
+              echo "Head Branch: $HEAD_BRANCH"
+              CHANGED_FILES=$(git diff --name-only "origin/$BASE_BRANCH"..."origin/$HEAD_BRANCH" | grep -E '\.jsx?$')
+            else
+              echo "Comparing current commit with previous commit"
+              git log --oneline -2 # This will log the last two commits for debugging
+              CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+            fi
+
+            if [ -z "$CHANGED_FILES" ]; then
+              echo "No JavaScript/JSX files have changed."
+            else
+              echo "Changed files: $CHANGED_FILES"
+            fi
+            echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         shell: /usr/bin/bash -e {0}
 
       - name: Output changed files for debugging
