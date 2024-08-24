@@ -6,8 +6,8 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    ecmaVersion: "latest", // Or a specific ECMAScript version like 2020
-    sourceType: "module", // Ensure this is set to 'module' to support import/export syntax
+    ecmaVersion: "latest",
+    sourceType: "module",
     ecmaFeatures: {
       jsx: true,
     },
@@ -17,10 +17,18 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "prettier",
     "plugin:prettier/recommended",
   ],
-  plugins: ["react-refresh", "import", "prettier", "react", "react-hooks",],
+  plugins: [
+    "react-refresh",
+    "import",
+    "prettier",
+    "react",
+    "react-hooks",
+  ],
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
@@ -29,5 +37,23 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "prettier/prettier": "error",
+    "import/no-unresolved": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { order: "asc" },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+        ],
+      },
+    ],
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/no-extraneous-dependencies": "error",
+    "import/prefer-default-export": "off",
   },
 };
