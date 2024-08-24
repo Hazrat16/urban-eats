@@ -160,12 +160,12 @@ jobs:
           cd urban-eats-client
           pwd
           ls
-          # if [ -n "$CHANGED_FILES" ]; then
-          #   echo "$CHANGED_FILES" | xargs -I {} ./node_modules/.bin/eslint {} --ext js,jsx --report-unused-disable-directives --max-warnings 0
-          # else
-          #   echo "No JavaScript/JSX files were changed."
-          # fi
           ./node_modules/.bin/eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "$CHANGED_FILES" | xargs -I {} ./node_modules/.bin/eslint {} --ext js,jsx --report-unused-disable-directives --max-warnings 0
+          else
+            echo "No JavaScript/JSX files were changed."
+          fi
 
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
