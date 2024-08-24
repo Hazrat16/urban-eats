@@ -20,7 +20,7 @@ module.exports = {
     "prettier",
     "plugin:prettier/recommended",
   ],
-  plugins: ["react-refresh", "import", "prettier", "react", "react-hooks"],
+  plugins: ["react-refresh", "import", "prettier", "react", "react-hooks","@typescript-eslint",],
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
