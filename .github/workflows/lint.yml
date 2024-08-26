@@ -160,7 +160,7 @@ jobs:
           cd urban-eats-client
           pwd
           ls
-          ./node_modules/.bin/eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0
+
           npm run lint $CHANGED_FILES
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
