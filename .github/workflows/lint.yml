@@ -140,8 +140,9 @@ jobs:
         run: |
           BASE_BRANCH="${{ github.base_ref }}"
           HEAD_BRANCH="${{ github.head_ref }}"
-          CHANGED_FILES=$(git diff --name-only "origin/${BASE_BRANCH}"..."origin/${HEAD_BRANCH}" | grep -E '\.jsx?$')
+          # CHANGED_FILES=$(git diff --name-only "origin/${BASE_BRANCH}"..."origin/${HEAD_BRANCH}" | grep -E '\.jsx?$')
           # CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+           CHANGED_FILES=$(git diff --name-only FETCH_HEAD HEAD -- '*.jsx')
 
 
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
