@@ -246,6 +246,14 @@ jobs:
           echo "Contents of current directory:"
           ls -R
 
+      - name: Check if useAuth.jsx exists
+        run: |
+          if [[ "$CHANGED_FILES" =~ "urban-eats-client/src/hooks/useAuth.jsx" ]]; then
+            echo "useAuth.jsx exists in changed files."
+          else
+            echo "useAuth.jsx does not exist in changed files."
+          fi
+
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
