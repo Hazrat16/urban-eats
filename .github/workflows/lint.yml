@@ -138,13 +138,11 @@ jobs:
       - name: Determine changed files
         id: changed-files
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_BRANCH="${{ github.base_ref }}"
-            HEAD_BRANCH="${{ github.head_ref }}"
-            CHANGED_FILES=$(git diff --name-only "origin/${BASE_BRANCH}"..."origin/${HEAD_BRANCH}" | grep -E '\.jsx?$')
-          else
-            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
-          fi
+          BASE_BRANCH="${{ github.base_ref }}"
+          HEAD_BRANCH="${{ github.head_ref }}"
+          CHANGED_FILES=$(git diff --name-only "origin/${BASE_BRANCH}"..."origin/${HEAD_BRANCH}" | grep -E '\.jsx?$')
+          # CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+
 
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         shell: bash
