@@ -207,6 +207,8 @@ jobs:
           else
             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
           fi
+          # Trim "urban-eats-client/" prefix from file paths
+          CHANGED_FILES=$(echo "$CHANGED_FILES" | sed 's|^urban-eats-client/||')
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         shell: bash
 
