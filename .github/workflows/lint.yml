@@ -53,7 +53,7 @@ jobs:
         run: |
           cd urban-eats-client
           if [ -n "$CHANGED_FILES" ]; then
-            echo "$CHANGED_FILES" | xargs ./node_modules/.bin/eslint --ext .js,.jsx --report-unused-disable-directives --max-warnings 0
+            echo "$CHANGED_FILES" | sed 's/^/.\//' | xargs ./node_modules/.bin/eslint --report-unused-disable-directives --max-warnings 0
           else
             echo "No JavaScript/JSX files were changed."
           fi
