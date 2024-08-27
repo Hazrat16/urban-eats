@@ -1,3 +1,74 @@
+# name: Lint changed JS/JSX files
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#         with:
+#           fetch-depth: 2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: "18"
+
+#       - name: Install dependencies
+#         run: |
+#           cd urban-eats-client
+#           npm install
+
+#       - name: Fetch all branches
+#         run: git fetch --all
+
+#       - name: Determine changed files
+#         id: changed-files
+#         run: |
+#           if [ "${{ github.event_name }}" = "pull_request" ]; then
+#             BASE_BRANCH="${{ github.event.pull_request.base.sha }}"
+#             HEAD_BRANCH="${{ github.event.pull_request.head.sha }}"
+#             CHANGED_FILES=$(git diff --name-only "$BASE_BRANCH" "$HEAD_BRANCH" | grep -E '\.jsx?$')
+#           else
+#             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
+#           fi
+#           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+#         shell: bash
+
+#       - name: Output changed files for debugging
+#         run: |
+#           echo "Changed files: $CHANGED_FILES"
+#         env:
+#           CHANGED_FILES: ${{ env.CHANGED_FILES }}
+
+#       - name: Run lint on changed files
+#         run: |
+#           cd urban-eats-client
+
+#           if [ -n "$CHANGED_FILES" ]; then
+#             # Make sure all paths are relative to the 'urban-eats-client' directory
+#             echo "$CHANGED_FILES" | sed 's|^|./|' > changed_files.txt
+
+#             # Debugging: Output the file list
+#             echo "Linting the following files:"
+#             cat changed_files.txt
+
+#             # Run ESLint on these files
+#             xargs -a changed_files.txt ./node_modules/.bin/eslint --report-unused-disable-directives --max-warnings 0
+#           else
+#             echo "No JavaScript/JSX files were changed."
+#           fi
+#         env:
+#           CHANGED_FILES: ${{ env.CHANGED_FILES }}
+
 name: Lint changed JS/JSX files
 
 on:
@@ -49,19 +120,22 @@ jobs:
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
+      - name: Verify file existence
+        run: |
+          cd urban-eats-client
+          echo "Verifying file existence..."
+          echo "$CHANGED_FILES" | sed 's|^|./|' | xargs -I {} sh -c 'test -e "{}" && echo "{} exists" || echo "{} does not exist"'
+        env:
+          CHANGED_FILES: ${{ env.CHANGED_FILES }}
+
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
-            
           if [ -n "$CHANGED_FILES" ]; then
-            # Make sure all paths are relative to the 'urban-eats-client' directory
             echo "$CHANGED_FILES" | sed 's|^|./|' > changed_files.txt
-
-            # Debugging: Output the file list
             echo "Linting the following files:"
             cat changed_files.txt
-
-            # Run ESLint on these files
+            # Run ESLint directly on the file list
             xargs -a changed_files.txt ./node_modules/.bin/eslint --report-unused-disable-directives --max-warnings 0
           else
             echo "No JavaScript/JSX files were changed."
