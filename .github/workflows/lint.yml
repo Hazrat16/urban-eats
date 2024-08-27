@@ -220,7 +220,7 @@ jobs:
           cd urban-eats-client
           echo "Verifying file existence..."
           pwd
-          echo "$CHANGED_FILES" while read -r file; do
+          echo "$CHANGED_FILES" | while read -r file; do
             if [ -f "$file" ]; then
               echo "$file exists"
             else
