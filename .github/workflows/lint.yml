@@ -231,6 +231,7 @@ jobs:
           cd urban-eats-client
           echo "Verifying file existence..."
           pwd
+          ls
           echo "$CHANGED_FILES" | sed 's|^|./|' | while read -r file; do
             if [ -f "$file" ]; then
               echo "$file exists"
