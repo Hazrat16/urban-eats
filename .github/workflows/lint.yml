@@ -1,5 +1,13 @@
 name: Lint changed JS/JSX files
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -8,41 +16,45 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "18"
+
       - name: Install dependencies
         run: |
           cd urban-eats-client
           npm install
+
       - name: Fetch all branches
-        run: |
-          git fetch --all
+        run: git fetch --all
+
       - name: Determine changed files
         id: changed-files
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_BRANCH="${{ github.base_ref }}"
-            HEAD_BRANCH="${{ github.head_ref }}"
-           CHANGED_FILES=$(git diff --name-only "origin/${BASE_BRANCH}"..."origin/${HEAD_BRANCH}" | grep -E '\.jsx?$')
+            BASE_BRANCH="${{ github.event.pull_request.base.sha }}"
+            HEAD_BRANCH="${{ github.event.pull_request.head.sha }}"
+            CHANGED_FILES=$(git diff --name-only "$BASE_BRANCH" "$HEAD_BRANCH" | grep -E '\.jsx?$')
           else
             CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
           fi
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         shell: bash
+
       - name: Output changed files for debugging
         run: |
           echo "Changed files: $CHANGED_FILES"
+        env:
+          CHANGED_FILES: ${{ env.CHANGED_FILES }}
+
       - name: Run lint on changed files
         run: |
-          pwd
-          ls
           cd urban-eats-client
-          pwd
-          ls
           if [ -n "$CHANGED_FILES" ]; then
-            echo "$CHANGED_FILES" | xargs -I {} ./node_modules/.bin/eslint {} --ext js,jsx --report-unused-disable-directives --max-warnings 0
+            echo "$CHANGED_FILES" 
+            xargs ./node_modules/.bin/eslint --ext .js,.jsx --report-unused-disable-directives --max-warnings 0
           else
             echo "No JavaScript/JSX files were changed."
           fi
