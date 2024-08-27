@@ -108,15 +108,9 @@
 #         env:
 #           CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
-name: Lint
+name: Lint changed JS/JSX files
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   lint:
