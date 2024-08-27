@@ -52,13 +52,9 @@ jobs:
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
+            
           if [ -n "$CHANGED_FILES" ]; then
-            # Debugging: Display current directory and files
-            echo "Current directory: $(pwd)"
-            echo "Files in current directory:"
-            ls -R
-
-            # Add './' to paths to make them relative to the current directory
+            # Make sure all paths are relative to the 'urban-eats-client' directory
             echo "$CHANGED_FILES" | sed 's|^|./|' > changed_files.txt
 
             # Debugging: Output the file list
@@ -66,7 +62,7 @@ jobs:
             cat changed_files.txt
 
             # Run ESLint on these files
-            xargs ./node_modules/.bin/eslint --report-unused-disable-directives --max-warnings 0 < changed_files.txt
+            xargs -a changed_files.txt ./node_modules/.bin/eslint --report-unused-disable-directives --max-warnings 0
           else
             echo "No JavaScript/JSX files were changed."
           fi
