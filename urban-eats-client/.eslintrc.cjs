@@ -22,13 +22,15 @@ module.exports = {
     "prettier",
     "plugin:prettier/recommended",
   ],
-  plugins: [
-    "react-refresh",
-    "import",
-    "prettier",
-    "react",
-    "react-hooks",
-  ],
+  plugins: ["react-refresh", "import", "prettier", "react", "react-hooks"],
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        moduleDirectory: ["node_modules", "src/"], 
+      },
+    },
+  },
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
@@ -41,8 +43,8 @@ module.exports = {
     "import/order": [
       "error",
       {
-        "alphabetize": { order: "asc" },
-        "groups": [
+        alphabetize: { order: "asc" },
+        groups: [
           "builtin",
           "external",
           "internal",
@@ -52,7 +54,7 @@ module.exports = {
         ],
       },
     ],
-    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/newline-after-import": ["error", { count: 1 }],
     "import/no-extraneous-dependencies": "error",
     "import/prefer-default-export": "off",
   },
