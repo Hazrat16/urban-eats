@@ -197,21 +197,6 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      # - name: Determine changed files
-      #   id: changed-files
-      #   run: |
-      #     if [ "${{ github.event_name }}" = "pull_request" ]; then
-      #       BASE_BRANCH="${{ github.event.pull_request.base.sha }}"
-      #       HEAD_BRANCH="${{ github.event.pull_request.head.sha }}"
-      #       CHANGED_FILES=$(git diff --name-only "$BASE_BRANCH" "$HEAD_BRANCH" | grep -E '\.jsx?$')
-      #     else
-      #       CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.jsx?$')
-      #     fi
-      #     # Trim "urban-eats-client/" prefix from file paths
-      #     CHANGED_FILES=$(echo "$CHANGED_FILES" | sed 's|^urban-eats-client/||')
-      #     echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
-      #   shell: bash
-
       - name: Determine changed files
         id: changed-files
         run: |
@@ -231,11 +216,6 @@ jobs:
 
           echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
         shell: bash
-
-      - name: Verify ESLint installation
-        run: |
-          cd urban-eats-client
-          ./node_modules/.bin/eslint --version
 
       - name: Verify file existence
         run: |
