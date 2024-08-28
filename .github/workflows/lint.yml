@@ -252,20 +252,12 @@ jobs:
         env:
           CHANGED_FILES: ${{ env.CHANGED_FILES }}
 
-      - name: Check if useAuth.jsx exists
-        run: |
-          if [[ "$CHANGED_FILES" =~ "urban-eats-client/src/hooks/useAuth.jsx" ]]; then
-            echo "useAuth.jsx exists in changed files."
-          else
-            echo "useAuth.jsx does not exist in changed files."
-          fi
-
       - name: Run lint on changed files
         run: |
           cd urban-eats-client
           pwd
           if [ -n "$CHANGED_FILES" ]; then
-            echo "$CHANGED_FILES" > changed_files.txt
+            echo "$CHANGED_FILES" | tr ' ' '\n' > changed_files.txt
             echo "Linting the following files:"
             cat changed_files.txt
             while IFS= read -r file; do
